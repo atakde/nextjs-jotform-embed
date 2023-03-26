@@ -1,6 +1,6 @@
 {
   "name": "nextjs-jotform-embed",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Embed Jotform iframe to your NextJS or React application easily",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
