@@ -26,7 +26,7 @@ const JotformEmbed = memo(({ src, className, styles, allowScrolling = false }) =
 
 
   const isPermitted = (originUrl, whiteListedDomains) => {
-    let url = document.createElement('a');
+    const url = document.createElement('a');
     url.href = originUrl;
     const hostname = url.hostname;
     let result = false;
