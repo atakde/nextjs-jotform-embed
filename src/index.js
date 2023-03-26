@@ -61,9 +61,7 @@ const JotformEmbed = memo(({ src, className, styles, allowScrolling = false }) =
         break;
       case "setHeight":
         iframe.style.height = args[1] + "px";
-        console.log("setHeight");
         if (!isNaN(args[1]) && parseInt(iframe.style.minHeight) > parseInt(args[1])) {
-          console.log("setHeight");
           iframe.style.minHeight = args[1] + "px";
         }
         break;
