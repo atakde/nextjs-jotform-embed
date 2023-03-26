@@ -26,10 +26,10 @@ const JotformEmbed = memo(({ src, className, styles, allowScrolling = false }) =
 
 
   const isPermitted = (originUrl, whiteListedDomains) => {
-    var url = document.createElement('a');
+    let url = document.createElement('a');
     url.href = originUrl;
-    var hostname = url.hostname;
-    var result = false;
+    const hostname = url.hostname;
+    let result = false;
     if (typeof hostname !== 'undefined') {
       whiteListedDomains.forEach(function (element) {
         if (hostname.slice((-1 * element.length - 1)) === '.'.concat(element) || hostname === element) {
@@ -40,14 +40,18 @@ const JotformEmbed = memo(({ src, className, styles, allowScrolling = false }) =
     }
   }
 
+  const isJotformOrigin = origin => {
+    return origin.indexOf('jotform') > -1;
+  };
+
   const handleIframeMessage = e => {
-    if (typeof e.data === 'object') { 
-      return; 
+    if (typeof e.data === 'object') {
+      return;
     }
 
     const args = e.data.split(":");
     const iframe = iframeRef.current;
-    if (!iframe) { 
+    if (!iframe) {
       return;
     }
 
@@ -91,8 +95,7 @@ const JotformEmbed = memo(({ src, className, styles, allowScrolling = false }) =
         break;
     }
 
-    const isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false;
-    if (isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
+    if (isJotformOrigin(e.origin) && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
       const urls = { "docurl": encodeURIComponent(document.URL), "referrer": encodeURIComponent(document.referrer) };
       iframe.contentWindow.postMessage(JSON.stringify({ "type": "urls", "value": urls }), "*");
     }
